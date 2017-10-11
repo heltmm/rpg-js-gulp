@@ -1,12 +1,43 @@
 export class Level{
-  constructor(array){
-    this.grid = array;
+  constructor(level, position){
+    this.position = position;
+    this.last_position;
+    if (level === 1) {
+      this.grid = [  ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],
+                      ["w"],["w"],["w"],["l"],["l"],["l"],["w"],["w"],["w"],["w"],["w"],["w"],
+                      ["l"],["l"],["l"],["l"],["w"],["l"],["w"],["w"],["w"],["w"],["w"],["w"],
+                      ["l"],["l"],["l"],["l"],["l"],["l"],["l"],["l"],["w"],["w"],["w"],["w"],
+                      ["w"],["l"],["w"],["w"],["w"],["w"],["w"],["l"],["l"],["l"],["w"],["w"],
+                      ["l"],["l"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["l"],["l"],["w"],
+                      ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["w"],["l"],["w"],
+                      ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["w"],["l"],["l"],
+                      ["l"],["l"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["w"],["w"],["l"],
+                      ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["w"],["w"],["l"]
+                  ];
+    }
+  }
+  move(direction){
+    if((direction === "ArrowRight") && ((this.grid[this.position + 1][0]) === "l")){
+      this.last_position = this.position
+      this.position += 1;
+    }
+    if((direction === "ArrowLeft") && ((this.grid[this.position - 1][0]) === "l")){
+      this.last_position = this.position
+      this.position -= 1;
+    }
+    if((direction === "ArrowUp") && ((this.grid[this.position - 12][0]) === "l")){
+      this.last_position = this.position
+      this.position -= 12;
+    }
+    if((direction === "ArrowDown") && ((this.grid[this.position + 12][0]) === "l")){
+      this.last_position = this.position
+      this.position += 12;
+    }
   }
 }
 
 export class Character {
   constructor(type){
-    this.position = 36;
     this.type = type;
     this.hp = 100;
     this.inventery = [];
@@ -21,24 +52,3 @@ export class Character {
     }
   }
 }
-// export class Game{
-//   constructor(type, array){
-//     this.character = new Character(type);
-//     this.level = new Level(array);
-//   }
-// }
-
-
-// let array1 = [  ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],
-//                 ["w"],["w"],["w"],["l"],["l"],["l"],["w"],["w"],["w"],["w"],["w"],["w"],
-//                 ["l"],["l"],["l"],["l"],["w"],["l"],["w"],["w"],["w"],["w"],["w"],["w"],
-//                 ["l"],["l"],["l"],["l"],["l"],["l"],["l"],["w"],["w"],["w"],["w"],["w"],
-//                 ["w"],["l"],["w"],["w"],["w"],["w"],["w"],["l"],["l"],["w"],["w"],["w"],
-//                 ["l"],["l"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],
-//                 ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],
-//                 ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],
-//                 ["l"],["l"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],
-//                 ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"]
-//             ];
-// const level1 = new Level(array)
-// level2 = new Level(array)

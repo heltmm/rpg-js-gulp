@@ -18,23 +18,13 @@ $(document).ready(function() {
   // sumbit form to start game
   $("#create_character").submit(function(event){
     event.preventDefault();
-    let array1 = [  ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],
-                    ["w"],["w"],["w"],["l"],["l"],["l"],["w"],["w"],["w"],["w"],["w"],["w"],
-                    ["l"],["l"],["l"],["l"],["w"],["l"],["w"],["w"],["w"],["w"],["w"],["w"],
-                    ["l"],["l"],["l"],["l"],["l"],["l"],["l"],["l"],["w"],["w"],["w"],["w"],
-                    ["w"],["l"],["w"],["w"],["w"],["w"],["w"],["l"],["l"],["l"],["w"],["w"],
-                    ["l"],["l"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["l"],["l"],["w"],
-                    ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["w"],["l"],["w"],
-                    ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["w"],["l"],["l"],
-                    ["l"],["l"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["w"],["w"],["l"],
-                    ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["w"],["w"],["l"]
-                ];
+
 
     let type = $("#character_type").val();
     $("#create_character").hide();
 
     let player = new Character(type);
-    let level1 = new Level(array1);
+    let level1 = new Level(1, 36);
 
     $("#game").show();
 
@@ -49,43 +39,19 @@ $(document).ready(function() {
         $(`#${sqr}`).addClass("green");
       }
     }
-    // on click
-    // var last_id = player.position;
-    // $(`#${last_id}`).html(`<img src='./${player.type}.png'>`);
-    // move player by click
-    // $(".sqr").click(function(e){
-    //   let current_id = parseInt($(e.currentTarget).attr('id'));
-    //
-    //   if((current_level.grid[`${current_id}`][0] === "l") && (((last_id-1) === current_id) || ((last_id+1) === current_id) || ((last_id-12) === current_id)|| ((last_id+12) === current_id))){
-    //     $(e.currentTarget).html(`<img src='./${player.type}.png'>`);
-    //     $(`#${last_id}`).html("");
-    //     last_id = current_id;
-    //   }
-    // });
 
-    var current_id = player.position;
-    $(`#${current_id}`).html(`<img src='./${player.type}.png'>`);
+
+    $(`#${current_level.position}`).html(`<img src='./${player.type}.png'>`);
     $(document).keydown(function(e){
-      if((e.key === "ArrowRight") &&(current_level.grid[`${current_id + 1}`][0] === "l")){
-        $(`#${current_id + 1}`).html(`<img src='./${player.type}.png'>`);
-        $(`#${current_id}`).html("");
-        current_id += 1;
+      var last_position = current_level.position
+      current_level.move(e.key)
+
+      if(current_level.last_position !== current_level.postion){
+        $(`#${current_level.position}`).html(`<img src='./${player.type}.png'>`);
+        $(`#${current_level.last_position}`).html("");
       }
-      if((e.key === "ArrowLeft") &&(current_level.grid[`${current_id - 1}`][0] === "l")){
-        $(`#${current_id - 1}`).html(`<img src='./${player.type}.png'>`);
-        $(`#${current_id}`).html("");
-        current_id -= 1;
-      }
-      if((e.key === "ArrowDown") &&(current_level.grid[`${current_id + 12}`][0] === "l")){
-        $(`#${current_id + 12}`).html(`<img src='./${player.type}.png'>`);
-        $(`#${current_id}`).html("");
-        current_id += 12;
-      }
-      if((e.key === "ArrowUp") &&(current_level.grid[`${current_id - 12}`][0] === "l")){
-        $(`#${current_id - 12}`).html(`<img src='./${player.type}.png'>`);
-        $(`#${current_id}`).html("");
-        current_id -= 12;
-      }
+
+
     });
   });
 });
