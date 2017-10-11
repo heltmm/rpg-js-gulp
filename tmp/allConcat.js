@@ -51,12 +51,12 @@ $(document).ready(function() {
     }
     // on click
     var last_id = player.position;
-    $(`#${last_id}`).html("<img src='./warrior.png'>");
+    $(`#${last_id}`).html(`<img src='./${player.type}.png'>`);
     $(".sqr").click(function(e){
       let current_id = parseInt($(e.currentTarget).attr('id'));
 
       if((current_level.grid[`${current_id}`][0] === "l") && (((last_id-1) === current_id) || ((last_id+1) === current_id) || ((last_id-12) === current_id)|| ((last_id+12) === current_id))){
-        $(e.currentTarget).html("<img src='./warrior.png'>");
+        $(e.currentTarget).html(`<img src='./${player.type}.png'>`);
         $(`#${last_id}`).html("");
         last_id = current_id;
       }

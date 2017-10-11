@@ -21,12 +21,12 @@ export class Character {
     }
   }
 }
-export class Game{
-  constructor(type, array){
-    this.character = new Character(type);
-    this.level = new Level(array);
-  }
-}
+// export class Game{
+//   constructor(type, array){
+//     this.character = new Character(type);
+//     this.level = new Level(array);
+//   }
+// }
 
 
 // let array1 = [  ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],
