@@ -1,11 +1,12 @@
 export class Level{
   constructor(array){
-    this.level = array;
+    this.grid = array;
   }
 }
 
 export class Character {
   constructor(type){
+    this.position = 36;
     this.type = type;
     this.hp = 100;
     this.inventery = [];
