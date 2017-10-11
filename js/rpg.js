@@ -42,6 +42,3 @@ export class Game{
 // const level1 = new Level(array)
 // level2 = new Level(array)
 //
-// rules:
-//   cant move on c;
-//   hp is 0 = dead
