@@ -53,10 +53,11 @@ $(document).ready(function() {
     console.log(current_id);
     console.log(last_id -1);
     console.log(last_id - (current_id-1));
-    if((array1[`${current_id}`][0] === "l") && ((last_id-1) === current_id)){
+    if((array1[`${current_id}`][0] === "l") && (((last_id-1) === current_id) || ((last_id+1) === current_id) || ((last_id-12) === current_id)|| ((last_id+12) === current_id))){
       $(e.currentTarget).html("<img src='./warrior.png'>");
+      $(`#${last_id}`).html("");
+      last_id = current_id;
     }
-    last_id = current_id;
   });
 
 });
