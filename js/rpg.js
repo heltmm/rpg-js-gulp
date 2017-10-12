@@ -3,14 +3,14 @@ export class Level{
 
     if (level === 1) {
       this.grid = [ "wa","wa","wa","wa","wa","wa","wa","wa","wa","wa","wa","wa",
-                    "wa","wa","wa","ld","ld","wp","wa","wa","wa","wa","wa","wa",
-                    "wa","ld","ld","ld","rc","bt","wa","wa","wa","wa","wa","wa",
-                    "wa","ld","ld","ld","ld","ld","ld","ld","wa","wa","wa","wa",
+                    "wa","wa","wa","ld","ld","wp","wa","wa","wa","ld","ld","ld",
+                    "ld","ld","wa","ld","rc","bt","wa","wa","wa","ld","wa","wa",
+                    "wa","ld","ld","ld","ld","ld","ld","ld","ld","ld","wa","wa",
                     "wa","ld","ld","ld","ld","wa","wa","ld","wa","wa","wa","wa",
                     "wa","ld","wa","wa","wa","wa","wa","ld","wa","wa","pr","ld",
-                    "ld","ld","wa","wa","wa","wa","wa","ld","wa","wa","lm","wa",
-                    "wa","wa","wa","wa","wa","wa","wa","ld","wa","wa","ld","wa",
-                    "wa","wa","wa","wa","wa","wa","wa","ld","ld","ld","ld","wa",
+                    "ld","ld","wa","wa","ld","ld","ld","ld","wa","wa","lm","wa",
+                    "wa","ld","wa","wa","ld","wa","wa","ld","wa","wa","ld","wa",
+                    "wa","ld","ld","ld","ld","ld","ld","ld","ld","ld","ld","wa",
                     "wa","wa","wa","wa","wa","wa","wa","wa","wa","wa","wa","wa"
                   ];
     }
@@ -36,8 +36,8 @@ export class Character {
       this.intelligence = 5;
     }
     if(type == "Pickle Rick"){
-      this.power = 15;
-      this.inteligence = 15;
+      this.power = 12;
+      this.intelligence = 6;
     }
   }
   move(direction, level){
@@ -68,9 +68,10 @@ export class Character {
   }
 
   attack(target){
-    let attack = this.power * 2;
+    let attack = this.power * 1.5;
+    attack += this.intelligence;
     if(this.inventory.length){
-      attack *= 1.5;
+      attack *= 2;
     }
     target.hp -= attack;
     console.log(this.hp);

@@ -16,6 +16,9 @@
 .darkGreen{
   background-color: darkgreen;
 }
+#images{
+  display: none;
+}
 
 #game {
   display: none;

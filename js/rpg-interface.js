@@ -74,14 +74,16 @@ $(document).ready(function() {
         $(`#${player.last_position}`).html("");
       }
 
+      var pickle_rick = new Character("Pickle Rick");
+
       $("#attack").click(function(){
-        let pickle_rick = new Character("Pickle Rick");
         player.attack(pickle_rick);
         pickle_rick.attack(player);
 
-        $("#status").html(`<div class='row'><div id='healthBar' class='col-sm-6'><h1>Health Bar</h1><div class='progress'><div class='progress-bar progress-bar-striped progress-bar-danger active' role='progressbar' aria-valuenow='40' aria-valuemin='0' aria-valuemax='100' style='width:${player.hp}%'>${player.hp}%</div></div></div>`)
+        $("#status").html(`<div class='row'><div id='healthBar' class='col-sm-6'><h1>Health Bar</h1><div class='progress'><div class='progress-bar progress-bar-striped progress-bar-danger active' role='progressbar' aria-valuenow='40' aria-valuemin='0' aria-valuemax='100' style='width:${player.hp}%'>${player.hp}%</div></div></div><div id='healthBar' class='col-sm-6'><h1>Health Bar</h1><div class='progress'><div class='progress-bar progress-bar-striped progress-bar-danger active' role='progressbar' aria-valuenow='40' aria-valuemin='0' aria-valuemax='100' style='width:${pickle_rick.hp}%'>${pickle_rick.hp}%</div></div></div></div>`);
       });
     });
+
 
 
   });
