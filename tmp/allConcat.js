@@ -38,13 +38,22 @@ $(document).ready(function() {
       if (current_level.grid[sqr][0] === "l"){
         $(`#${sqr}`).addClass("green");
       }
+      if (current_level.grid[sqr][0] === "a"){
+        $(`#${sqr}`).addClass("green");
+        if(player.type === "Warrior"){
+          $(`#${sqr}`).html(`<img src='./sword.png'>`);
+        }
+        if(player.type === "Wizard"){
+          $(`#${sqr}`).html(`<img src='./book.png'>`);
+        }
+      }
     }
 
 
     $(`#${current_level.position}`).html(`<img src='./${player.type}.png'>`);
     $(document).keydown(function(e){
-      var last_position = current_level.position
-      current_level.move(e.key)
+      var last_position = current_level.position;
+      current_level.move(e.key);
 
       if(current_level.last_position !== current_level.postion){
         $(`#${current_level.position}`).html(`<img src='./${player.type}.png'>`);

@@ -3,7 +3,7 @@
   "description": "",
   "main": "gulpfile.js",
   "license": "ISC",
-  "homepage": "",
+  "homepage": "https://github.com/heltmm/rpg-js-gulp",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -15,5 +15,8 @@
     "jquery": "^3.2.1",
     "bootstrap": "v4.0.0-beta",
     "moment": "^2.19.0"
-  }
+  },
+  "authors": [
+    "Mark <heltmm@gmail.com>"
+  ]
 }

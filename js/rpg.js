@@ -3,34 +3,34 @@ export class Level{
     this.position = position;
     this.last_position;
     if (level === 1) {
-      this.grid = [  ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],
-                      ["w"],["w"],["w"],["l"],["l"],["l"],["w"],["w"],["w"],["w"],["w"],["w"],
-                      ["l"],["l"],["l"],["l"],["w"],["l"],["w"],["w"],["w"],["w"],["w"],["w"],
-                      ["l"],["l"],["l"],["l"],["l"],["l"],["l"],["l"],["w"],["w"],["w"],["w"],
-                      ["w"],["l"],["w"],["w"],["w"],["w"],["w"],["l"],["l"],["l"],["w"],["w"],
-                      ["l"],["l"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["l"],["l"],["w"],
-                      ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["w"],["l"],["w"],
-                      ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["w"],["l"],["l"],
-                      ["l"],["l"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["w"],["w"],["l"],
-                      ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["w"],["w"],["l"]
+      this.grid = [ ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],["w"],
+                    ["w"],["w"],["w"],["l"],["l"],["l"],["w"],["w"],["w"],["w"],["w"],["w"],
+                    ["l"],["l"],["l"],["l"],["w"],["l"],["w"],["w"],["w"],["w"],["w"],["w"],
+                    ["l"],["l"],["l"],["l"],["l"],["l"],["l"],["l"],["w"],["w"],["w"],["w"],
+                    ["w"],["l"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["w"],["w"],["w"],
+                    ["l"],[""],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["w"],["l"],["w"],
+                    ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["w"],["l"],["w"],
+                    ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["w"],["l"],["l"],
+                    ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["w"],["w"],["l"],
+                    ["w"],["w"],["w"],["w"],["w"],["w"],["w"],["l"],["w"],["w"],["w"],["l"]
                   ];
     }
   }
   move(direction){
-    if((direction === "ArrowRight") && ((this.grid[this.position + 1][0]) === "l")){
-      this.last_position = this.position
+    if((direction === "ArrowRight") && ((this.grid[this.position + 1][0]) !== "w")){
+      this.last_position = this.position;
       this.position += 1;
     }
-    if((direction === "ArrowLeft") && ((this.grid[this.position - 1][0]) === "l")){
-      this.last_position = this.position
+    if((direction === "ArrowLeft") && ((this.grid[this.position - 1][0]) !== "w")){
+      this.last_position = this.position;
       this.position -= 1;
     }
-    if((direction === "ArrowUp") && ((this.grid[this.position - 12][0]) === "l")){
-      this.last_position = this.position
+    if((direction === "ArrowUp") && ((this.grid[this.position - 12][0]) !== "w")){
+      this.last_position = this.position;
       this.position -= 12;
     }
-    if((direction === "ArrowDown") && ((this.grid[this.position + 12][0]) === "l")){
-      this.last_position = this.position
+    if((direction === "ArrowDown") && ((this.grid[this.position + 12][0]) !== "w")){
+      this.last_position = this.position;
       this.position += 12;
     }
   }
