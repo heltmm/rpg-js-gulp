@@ -21,6 +21,7 @@ export class Level{
 export class Character {
   constructor(type, position){
     this.position = position;
+    this.alive = true;
     this.last_position;
     this.type = type;
     this.hp = 100;
@@ -33,6 +34,10 @@ export class Character {
     if (type == "Wizard") {
       this.power = 3;
       this.intelligence = 5;
+    }
+    if(type == "Pickle Rick"){
+      this.power = 15;
+      this.inteligence = 15;
     }
   }
   move(direction, level){
@@ -61,6 +66,17 @@ export class Character {
       return false;
     }
   }
+
+  attack(target){
+    let attack = this.power * 2;
+    if(this.inventory.length){
+      attack *= 1.5;
+    }
+    target.hp -= attack;
+    console.log(this.hp);
+    console.log(target.hp);
+  }
+
   squareChecker(level){
     if(level.grid[this.position] === "wp"){
       if (this.type === "Wizard"){

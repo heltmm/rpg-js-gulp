@@ -2,6 +2,8 @@ import {Character, Level} from './../js/rpg.js';
 
 
 $(document).ready(function() {
+
+
   // sumbit form to start game
   $("#create_character").submit(function(event){
     event.preventDefault();
@@ -14,9 +16,11 @@ $(document).ready(function() {
     var level1 = new Level(1);
 
     $("#game").show();
+    $("#status").show();
 
     let current_level = level1;
 
+    //draw board
     for(let sqr = 0; sqr < 120; sqr++){
       if (current_level.grid[sqr] === "wa"){
         $(`#${sqr}`).addClass("blue");
@@ -62,13 +66,23 @@ $(document).ready(function() {
         $("#game").hide();
         $("#fight").show();
         $("#fight").html("<h1>Fight!</h1>");
-        $("#fight").html(`<h1>Fight!</h1><div class='row'><div class='col-sm-6'><img src='./${player.type}.png'></div><div class='col-sm-6'><img src='./pickle_rick.gif'></div></div>`);
+        $("#fight").html(`<h1>Fight!</h1><div class='row'><div class='col-sm-6'><img src='./${player.type}.png'><h2>${player.type}</h2><button id='attack'>fight</button></div><div class='col-sm-6'><img src='./pickle_rick.gif'><h2>Pickle Rick</h2></div></div><h2>VS</h2>`);
       }
 
       if (player.last_position !== player.position){
         $(`#${player.position}`).html(`<img src='./${player.type}.png'>`);
         $(`#${player.last_position}`).html("");
       }
+
+      $("#attack").click(function(){
+        let pickle_rick = new Character("Pickle Rick");
+        player.attack(pickle_rick);
+        pickle_rick.attack(player);
+
+        $("#status").html(`<div class='row'><div id='healthBar' class='col-sm-6'><h1>Health Bar</h1><div class='progress'><div class='progress-bar progress-bar-striped progress-bar-danger active' role='progressbar' aria-valuenow='40' aria-valuemin='0' aria-valuemax='100' style='width:${player.hp}%'>${player.hp}%</div></div></div>`)
+      });
     });
+
+
   });
 });

@@ -30,6 +30,7 @@ img {
   background-color: black;
   width: 1200px;
   height: 1000px;
+  color: white;
 }
 #fight h1 {
   color: red;
@@ -38,4 +39,7 @@ img {
 #fight img {
   height: 400px;
   width: auto;
+}
+#status {
+  display: none;
 }
