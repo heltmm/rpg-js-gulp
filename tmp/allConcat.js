@@ -1,5 +1,58 @@
 import {Character, Level} from './../js/rpg.js';
 
+
+$(document).ready(function() {
+  // sumbit form to start game
+  $("#create_character").submit(function(event){
+    event.preventDefault();
+
+
+    let type = $("#character_type").val();
+    $("#create_character").hide();
+
+    var player = new Character(type, 72);
+    var level1 = new Level(1);
+
+    $("#game").show();
+
+    let current_level = level1;
+
+    for(let sqr = 0; sqr < 120; sqr++){
+      if (current_level.grid[sqr] === "wa"){
+        $(`#${sqr}`).addClass("blue");
+      }
+      if (current_level.grid[sqr] === "ld"){
+        $(`#${sqr}`).addClass("green");
+      }
+      if (current_level.grid[sqr] === "rc"){
+        $(`#${sqr}`).addClass("brown");
+      }
+      if (current_level.grid[sqr] === "wp"){
+        $(`#${sqr}`).addClass("green");
+        if(player.type === "Warrior"){
+          $(`#${sqr}`).html(`<img src='./sword.png'>`);
+        }
+        if(player.type === "Wizard"){
+          $(`#${sqr}`).html(`<img src='./book.png'>`);
+        }
+      }
+    }
+
+    $(`#${player.position}`).html(`<img src='./${player.type}.png'>`);
+
+    $(document).keydown(function(e){
+      let last_position = player.position;
+      player.move(e.key, current_level);
+      player.addToInvetory(current_level);
+
+      if(player.last_position !== player.position){
+        $(`#${player.position}`).html(`<img src='./${player.type}.png'>`);
+        $(`#${player.last_position}`).html("");
+      }
+    });
+  });
+});
+
 $(document).ready(function() {
   // build game board template display
   let board = "";
@@ -13,54 +66,5 @@ $(document).ready(function() {
     board += "</div>";
   }
   $("#game").append(board);
-// #############################################################################
-
-  // sumbit form to start game
-  $("#create_character").submit(function(event){
-    event.preventDefault();
-
-
-    let type = $("#character_type").val();
-    $("#create_character").hide();
-
-    let player = new Character(type);
-    let level1 = new Level(1, 36);
-
-    $("#game").show();
-
-
-    let current_level = level1;
-
-    for(let sqr = 0; sqr < 120; sqr++){
-      if (current_level.grid[sqr][0] === "w"){
-        $(`#${sqr}`).addClass("blue");
-      }
-      if (current_level.grid[sqr][0] === "l"){
-        $(`#${sqr}`).addClass("green");
-      }
-      if (current_level.grid[sqr][0] === "a"){
-        $(`#${sqr}`).addClass("green");
-        if(player.type === "Warrior"){
-          $(`#${sqr}`).html(`<img src='./sword.png'>`);
-        }
-        if(player.type === "Wizard"){
-          $(`#${sqr}`).html(`<img src='./book.png'>`);
-        }
-      }
-    }
-
-
-    $(`#${current_level.position}`).html(`<img src='./${player.type}.png'>`);
-    $(document).keydown(function(e){
-      var last_position = current_level.position;
-      current_level.move(e.key);
-
-      if(current_level.last_position !== current_level.postion){
-        $(`#${current_level.position}`).html(`<img src='./${player.type}.png'>`);
-        $(`#${current_level.last_position}`).html("");
-      }
-
-
-    });
-  });
 });
+// #############################################################################

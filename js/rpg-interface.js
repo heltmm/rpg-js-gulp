@@ -1,20 +1,7 @@
 import {Character, Level} from './../js/rpg.js';
 
-$(document).ready(function() {
-  // build game board template display
-  let board = "";
-  let x = 0;
-  for(let row = 0; row < 10; row++) {
-    board += "<div class='row'>";
-    for(let col = 0; col < 12; col++){
-      board += `<div class='col-sm-1'><div class='sqr' id='${x}'></div></div>`;
-      x += 1;
-    }
-    board += "</div>";
-  }
-  $("#game").append(board);
-// #############################################################################
 
+$(document).ready(function() {
   // sumbit form to start game
   $("#create_character").submit(function(event){
     event.preventDefault();
@@ -23,22 +10,24 @@ $(document).ready(function() {
     let type = $("#character_type").val();
     $("#create_character").hide();
 
-    let player = new Character(type);
-    let level1 = new Level(1, 36);
+    var player = new Character(type, 72);
+    var level1 = new Level(1);
 
     $("#game").show();
-
 
     let current_level = level1;
 
     for(let sqr = 0; sqr < 120; sqr++){
-      if (current_level.grid[sqr][0] === "w"){
+      if (current_level.grid[sqr] === "wa"){
         $(`#${sqr}`).addClass("blue");
       }
-      if (current_level.grid[sqr][0] === "l"){
+      if (current_level.grid[sqr] === "ld"){
         $(`#${sqr}`).addClass("green");
       }
-      if (current_level.grid[sqr][0] === "a"){
+      if (current_level.grid[sqr] === "rc"){
+        $(`#${sqr}`).addClass("brown");
+      }
+      if (current_level.grid[sqr] === "wp"){
         $(`#${sqr}`).addClass("green");
         if(player.type === "Warrior"){
           $(`#${sqr}`).html(`<img src='./sword.png'>`);
@@ -49,18 +38,17 @@ $(document).ready(function() {
       }
     }
 
+    $(`#${player.position}`).html(`<img src='./${player.type}.png'>`);
 
-    $(`#${current_level.position}`).html(`<img src='./${player.type}.png'>`);
     $(document).keydown(function(e){
-      var last_position = current_level.position;
-      current_level.move(e.key);
+      let last_position = player.position;
+      player.move(e.key, current_level);
+      player.addToInvetory(current_level);
 
-      if(current_level.last_position !== current_level.postion){
-        $(`#${current_level.position}`).html(`<img src='./${player.type}.png'>`);
-        $(`#${current_level.last_position}`).html("");
+      if(player.last_position !== player.position){
+        $(`#${player.position}`).html(`<img src='./${player.type}.png'>`);
+        $(`#${player.last_position}`).html("");
       }
-
-
     });
   });
 });
