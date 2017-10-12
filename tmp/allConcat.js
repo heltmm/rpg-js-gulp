@@ -1,3 +1,9 @@
+
+$(document).ready(function() {
+  $("#fight").html("<h1>Fight!</h1>");
+  $("#fight").html(`<h1>Fight!</h1><div class='row'><div class='col-sm-6'><img src='./${player.type}.png'></div><div class='col-sm-6'><img src='./pickle_rick.gif'></div></div>`);
+});
+
 import {Character, Level} from './../js/rpg.js';
 
 
@@ -21,7 +27,7 @@ $(document).ready(function() {
       if (current_level.grid[sqr] === "wa"){
         $(`#${sqr}`).addClass("blue");
       }
-      if (current_level.grid[sqr] === "ld"){
+      if (current_level.grid[sqr] === "ld" || current_level.grid[sqr] === "bt"){
         $(`#${sqr}`).addClass("green");
       }
       if (current_level.grid[sqr] === "rc"){
@@ -36,6 +42,13 @@ $(document).ready(function() {
           $(`#${sqr}`).html(`<img src='./book.png'>`);
         }
       }
+      if (current_level.grid[sqr] === "lm"){
+        $(`#${sqr}`).addClass("green");
+        $(`#${sqr}`).html(`<img src='./lunch_missile.png'>`);
+      }
+      if(current_level.grid[sqr] === 'pr'){
+        $(`#${sqr}`).addClass("darkGreen");
+      }
     }
 
     $(`#${player.position}`).html(`<img src='./${player.type}.png'>`);
@@ -43,9 +56,22 @@ $(document).ready(function() {
     $(document).keydown(function(e){
       let last_position = player.position;
       player.move(e.key, current_level);
-      player.addToInvetory(current_level);
+      let added = player.squareChecker(current_level);
+      if (added != "battle") {
+        let listed_inventory = "";
+        player.inventory.forEach(function(item){
+          listed_inventory += `<li>${item}</li>`;
+        });
+        $("#inventory").html(`<h1>Inventory:</h1>${listed_inventory}`);
+      }
+      if(added === "battle"){
+        $("#game").hide();
+        $("#fight").show();
+        $("#fight").html("<h1>Fight!</h1>");
+        $("#fight").html(`<h1>Fight!</h1><div class='row'><div class='col-sm-6'><img src='./${player.type}.png'></div><div class='col-sm-6'><img src='./pickle_rick.gif'></div></div>`);
+      }
 
-      if(player.last_position !== player.position){
+      if (player.last_position !== player.position){
         $(`#${player.position}`).html(`<img src='./${player.type}.png'>`);
         $(`#${player.last_position}`).html("");
       }
@@ -65,6 +91,11 @@ $(document).ready(function() {
     }
     board += "</div>";
   }
+  //health bar
+  board += "<div class='row'><div id='healthBar' class='col-sm-6'><h1>Health Bar</h1><div class='progress'><div class='progress-bar progress-bar-striped progress-bar-danger active' role='progressbar' aria-valuenow='40' aria-valuemin='0' aria-valuemax='100' style='width:100%'>100%</div></div></div>";
+  //inventory
+  board += "<div id='inventory' class='col-sm-6'><h1>Inventory:</h1><p>empty</p></div></div>";
+
   $("#game").append(board);
 });
 // #############################################################################

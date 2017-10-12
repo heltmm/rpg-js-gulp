@@ -13,6 +13,9 @@
 .col-sm-1{
   padding: 0 !important;
 }
+.darkGreen{
+  background-color: darkgreen;
+}
 
 #game {
   display: none;
@@ -20,4 +23,19 @@
 img {
   height: 100px;
   width: 100px;
+}
+#fight{
+  display: none;
+  text-align: center;
+  background-color: black;
+  width: 1200px;
+  height: 1000px;
+}
+#fight h1 {
+  color: red;
+}
+
+#fight img {
+  height: 400px;
+  width: auto;
 }

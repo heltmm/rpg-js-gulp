@@ -4,11 +4,11 @@ export class Level{
     if (level === 1) {
       this.grid = [ "wa","wa","wa","wa","wa","wa","wa","wa","wa","wa","wa","wa",
                     "wa","wa","wa","ld","ld","wp","wa","wa","wa","wa","wa","wa",
-                    "wa","ld","ld","ld","rc","ld","wa","wa","wa","wa","wa","wa",
+                    "wa","ld","ld","ld","rc","bt","wa","wa","wa","wa","wa","wa",
                     "wa","ld","ld","ld","ld","ld","ld","ld","wa","wa","wa","wa",
                     "wa","ld","ld","ld","ld","wa","wa","ld","wa","wa","wa","wa",
-                    "wa","ld","wa","wa","wa","wa","wa","ld","wa","wa","ld","ld",
-                    "ld","ld","wa","wa","wa","wa","wa","ld","wa","wa","ld","wa",
+                    "wa","ld","wa","wa","wa","wa","wa","ld","wa","wa","pr","ld",
+                    "ld","ld","wa","wa","wa","wa","wa","ld","wa","wa","lm","wa",
                     "wa","wa","wa","wa","wa","wa","wa","ld","wa","wa","ld","wa",
                     "wa","wa","wa","wa","wa","wa","wa","ld","ld","ld","ld","wa",
                     "wa","wa","wa","wa","wa","wa","wa","wa","wa","wa","wa","wa"
@@ -61,7 +61,7 @@ export class Character {
       return false;
     }
   }
-  addToInvetory(level){
+  squareChecker(level){
     if(level.grid[this.position] === "wp"){
       if (this.type === "Wizard"){
         this.inventory.push("Book");
@@ -72,6 +72,15 @@ export class Character {
       level.grid[this.position] = "ld";
       alert(`${this.inventory[this.inventory.length -1]} added to inventory`);
       return true;
+    }
+    else if (level.grid[this.position] === "lm"){
+      this.inventory.push("Lunch Missile");
+      level.grid[this.position] = "ld";
+      alert(`${this.inventory[this.inventory.length -1]} added to inventory`);
+      return true;
+    }
+    else if(level.grid[this.position] === "pr"){
+      return "battle";
     }
     else{
       return false;
